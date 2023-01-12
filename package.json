@@ -24,8 +24,17 @@
     "@ant-design/pro-layout": "^6.5.0",
     "antd": "^5.1.2",
     "axios": "^1.2.2",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
+    "echarts": "^5.4.1",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "nprogress": "^0.2.0",
     "react": "17.x",
     "react-dom": "17.x",
+    "react-draft-wysiwyg": "^1.15.0",
+    "react-tsparticles": "^2.7.1",
+    "tsparticles": "^2.7.1",
     "umi": "^3.5.36"
   },
   "devDependencies": {

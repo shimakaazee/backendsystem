@@ -1,5 +1,6 @@
-import {Avatar, Layout, Menu, theme} from 'antd';
-import {useState} from "react";
+import { Avatar, Layout, Menu, theme } from 'antd';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Dropdown, Space } from 'antd';
 import {
   MenuFoldOutlined,
@@ -9,55 +10,68 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 
-const {Header} = Layout;
+const { Header } = Layout;
+
 const header = () => {
-
+  const history = useHistory();
   const [collapsed, setcollapsed] = useState(false);
-
+  const {
+    role: { roleName },
+    username,
+  } = JSON.parse(localStorage.getItem('token'));
   const change = () => {
-    setcollapsed(!collapsed)
-  }
+    setcollapsed(!collapsed);
+  };
 
-  const  items=[
-      {
-        key: '1',
-        label: (
-          <a target="_blank" rel="noopener noreferrer" >
-            超级管理员Admin
-          </a>
-        ),
-      },
+  const items = [
+    {
+      key: '1',
+      label: (
+        <a target="_blank" rel="noopener noreferrer">
+          {roleName}
+          {username}
+        </a>
+      ),
+    },
 
-      {
-        key: '4',
-        danger: true,
-        label: '退出',
-      },
-    ];
-
+    {
+      danger: true,
+      label: (
+        <a
+          onClick={() => {
+            localStorage.setItem('token', '');
+            history.push('/login');
+          }}
+        >
+          退出登录
+        </a>
+      ),
+    },
+  ];
 
   return (
-    <Header className="site-layout-background"
-            style={{
-              padding: '0 16px',
-            }}
+    <Header
+      className="site-layout-background"
+      style={{
+        padding: '0 16px',
+      }}
     >
-      {
-        collapsed ? <MenuUnfoldOutlined onClick={change}/> : <MenuFoldOutlined onClick={change}/>
-      }
+      {collapsed ? (
+        <MenuUnfoldOutlined onClick={change} />
+      ) : (
+        <MenuFoldOutlined onClick={change} />
+      )}
 
-      <div style={{float:"right"}}>
-        <Dropdown  menu={{items}}>
+      <div style={{ float: 'right' }}>
+        <Dropdown menu={{ items }}>
           <Space>
             欢迎回来
-          <Avatar size={50} icon={<UserOutlined/>}></Avatar>
+            <Avatar size={50} icon={<UserOutlined />}></Avatar>
           </Space>
         </Dropdown>
       </div>
-
     </Header>
-  )
+  );
+};
 
-}
-
-export default header
+export default header;

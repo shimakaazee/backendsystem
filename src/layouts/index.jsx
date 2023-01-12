@@ -1,38 +1,44 @@
-import {Layout, Menu} from 'antd'
+import { Layout, Menu } from 'antd';
 
 import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
   UserOutlined,
   VideoCameraOutlined,
-  UploadOutlined
+  UploadOutlined,
+} from '@ant-design/icons';
+import Sider from '../components/Sider';
+import Header from '../components/Header';
+import './index.less';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
+import { useEffect } from 'react';
 
-} from '@ant-design/icons'
-import Sider from '../components/Sider'
-import Header from '../components/Header'
-import './index.less'
-
-const {Content} = Layout;
+const { Content } = Layout;
 
 const index = (props) => {
+  NProgress.start();
+  useEffect(() => {
+    NProgress.done();
+  });
   return (
     <Layout>
-      <Sider/>
+      <Sider />
       <Layout className="site-layout">
-        <Header/>
+        <Header />
         <Content
           style={{
             margin: '24px 16px',
             padding: 24,
             minHeight: 280,
-            overflow:'auto'
+            overflow: 'auto',
           }}
         >
           {props.children}
         </Content>
       </Layout>
     </Layout>
-  )
-}
+  );
+};
 
-export default index
+export default index;
